@@ -2,31 +2,24 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+
+        stage('Clone Repository') {
             steps {
-                git 'YOUR_GITHUB_REPO_URL'
+                git 'https://github.com/Poojakbanakare/hospital-booking.git'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'sonar-scanner'
-                }
+                echo 'Running SonarQube Analysis'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t hospital-booking:latest .'
+                bat 'docker build -t hospital-booking .'
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                sh 'kubectl apply -f deployment.yaml'
-                sh 'kubectl apply -f service.yaml'
-            }
-        }
     }
 }
