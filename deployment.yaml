@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hospital-booking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hospital-booking
+  template:
+    metadata:
+      labels:
+        app: hospital-booking
+    spec:
+      containers:
+      - name: hospital-booking
+        image: hospital-booking:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
