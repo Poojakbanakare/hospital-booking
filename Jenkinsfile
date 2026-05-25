@@ -5,7 +5,7 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/Poojakbanakare/hospital-booking.git'
+                git branch: 'main', url: 'https://github.com/Poojakbanakare/hospital-booking.git'
             }
         }
 
@@ -17,7 +17,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t hospital-booking .'
+                sh 'docker build -t hospital-booking .'
             }
         }
 
